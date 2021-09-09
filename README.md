@@ -3,7 +3,7 @@
 
 Single-cell ribonucleic acid sequencing (scRNA-seq) is becoming widely employed to study biological processes in great depth. Its name describes its key advantage, the resolution of transcriptomes at single-cell level.
 In the Publication mentioned above, we exemplarily demonstrate integration and qualitative assessment of scRNA-Seq-data across three species: human (Homo sapiens), hamster (Mesocricetus auratus), and mice (Mus musculus). We used quality-filtered scRNA-seq data of lungs from 4 different sources (Figure 1) using up to date analysis workflows.
-All cross-species analysis code of this example including expression of canonical celltype-specific genes is made available via this Github page. For the creation of Figure 1 further processing and alinment was performed with Inkscape (Inkscape Community; https://inkscape.org/de/; gitlab.com/inkscape/inkscape)
+All cross-species analysis code of this example including expression of canonical celltype-specific genes is made available via this Github page. For the creation of Figure 1 further processing and alignment was performed with Inkscape (Inkscape Community; https://inkscape.org/de/; gitlab.com/inkscape/inkscape)
 
 
 
