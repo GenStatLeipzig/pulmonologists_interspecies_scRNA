@@ -1,3 +1,53 @@
+#' ---
+#' output:
+#'   html_document:
+#'     toc: true
+#'     toc_float: true
+#'     code_folding: show
+#' ---
+#'
+
+# # INITIATE SCRIPT ----
+rm(list = ls())
+
+
+r_on_server = T
+
+if(r_on_server) {
+  rootpath = "/net/ifs1/san_projekte/projekte/"
+  .libPaths("/net/ifs1/san_projekte/projekte/genstat/07_programme/rpackages/forostar")
+  toolboxH::initializeSkript(computer = "forostar" )
+} else {
+  rootpath =  "R:"
+  toolboxH::initializeSkript(computer = "local" )
+}
+require(toolboxH) # https://github.com/holgerman/toolboxH
+knitr::opts_chunk$set(cache = F, results = "markup", echo=T, fig.width = 10, fig.height = 7 )
+
+packages2load =c("magrittr","knitr", "ggplot2", "scales", "ggthemes", "assertr","Seurat", 'paletteer',"pheatmap", "cowplot", "here", "plotly", "harmony")
+
+new.packages <- packages2load[!(packages2load %in% installed.packages()[,"Package"])]
+new.packages
+
+if(length(new.packages)) BiocManager::install(new.packages)
+
+for(i in packages2load) {
+
+  suppressPackageStartupMessages(library(i, character.only = TRUE))
+
+}
+asdf
+# # LOAD DATA ----
+# Seurat objects from standard single species analysis, e.g. https://satijalab.org/seurat/articles/get_started.html,  QC filtered and set back applying Seurat::DietSeurat() function
+
+human_travaglini  = readRDS(here("data/s511_1_diet_human_travaglini.RDS"))
+human_travaglini
+
+
+
+
+
+
 # # INITIIEREN ####
 rm(list = ls())
 #
