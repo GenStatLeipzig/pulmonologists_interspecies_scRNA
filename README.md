@@ -1,6 +1,7 @@
 
 # A pulmonologist’s guide to perform and analyse cross-species single-lung-cell transcriptomics 
 
+Single-cell ribonucleic acid sequencing (scRNA-seq) is becoming widely employed to study biological processes in great depth. Its name describes its key advantage, the resolution of transcriptomes at single-cell level.
 In the Publication mentioned above, we exemplarily demonstrate integration and qualitative assessment of scRNA-Seq-data across three species: human (Homo sapiens), hamster (Mesocricetus auratus), and mice (Mus musculus). We used quality-filtered scRNA-seq data of lungs from 4 different sources (Figure 1) using up to date analysis workflows.
 
 
