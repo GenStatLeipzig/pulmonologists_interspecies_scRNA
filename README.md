@@ -14,7 +14,7 @@ Cross-species comparison of sequenced lung cells. A) Schematic single-cell ribon
 
 
 
-# Supplemental Figures to the manuscript 
+# Supplementary Figures to the manuscript 
 
 ![Dotplot_Marker_All in One](https://user-images.githubusercontent.com/73164857/132716956-c5d6e118-8c2e-439f-967f-e1de4928e3db.png)
 
@@ -22,5 +22,5 @@ Cross-species comparison of sequenced lung cells. A) Schematic single-cell ribon
 FIGURE S1: 
 Dotplot of cross-species comparison of RNA marker genes. The point size indicates the percentage of cells in a certain population expressing the indicated marker gene. The colour indicates the dataset. Hamster: red, Mouse: blue, Human Charité: green, Human Travaglini et al.: black. Average expression is indicated by colour intensity. 
 
-# Additional Information to sample material
+# Supplementary Informations on sample material
 
