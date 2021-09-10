@@ -16,7 +16,7 @@ Cross-species comparison of sequenced lung cells. A) Schematic single-cell ribon
 
 # Supplementary Figures to the manuscript 
 
-![Dotplot_Marker_All in One](https://user-images.githubusercontent.com/73164857/132716956-c5d6e118-8c2e-439f-967f-e1de4928e3db.png)
+![Dotplot_Marker_All in One](https://github.com/GenStatLeipzig/pulmonologists_interspecies_scRNA/blob/main/results/s5_1_canonical_markers.jpeg)
 
 
 FIGURE S1: 
