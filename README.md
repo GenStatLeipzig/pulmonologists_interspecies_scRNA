@@ -9,8 +9,7 @@ All cross-species analysis code of this example including expression of canonica
 
 ![Figure Method 210830_v5 3](https://user-images.githubusercontent.com/73164857/132707879-fd342a69-1ba5-4e44-bc23-9d0d9f737a22.PNG)
 FIGURE 1: 
-Cross-species comparison of sequenced lung cells. A) Schematic single-cell ribonucleic acid sequencing workflow, created with Biorender.com. B) Pie charts of lung cell frequencies in indicated species. C) Uniform manifold approximation and projection (UMAP) plot of identified cell populations across species. D) Feature plots indicating the stress response of single lung cells across species based on the 14 stress related genes ATF3, BTG1, BTG2, DUSP1, EGR1, FOS, FOSB, HSP90AB1, HSPA8, HSPB1, IER3, JUN, JUNB, and JUND. Prolif.: proliferating, AT1: alveolar epithelial cells type 1, AT2: alveolar epithelial cells type 2, ly Endothelial: lymphatic endothelial cells.
-
+Cross-species comparison of sequenced lung cells. A) Schematic single-cell ribonucleic acid sequencing workflow, created with Biorender.com. B) Pie charts of lung cell frequencies in indicated species. C) Uniform manifold approximation and projection (UMAP) plot of identified cell populations across species. D) Feature plots indicating the stress response of single lung cells across species based on the 12 stress related genes expressed in all four species, namely ATF3, BTG2, DUSP1, EGR1, FOS, FOSB, HSPA8, HSPB1, IER3, JUN, JUNB, and JUND. Prolif.: proliferating, AT1: alveolar epithelial cells type 1, AT2: alveolar epithelial cells type 2, ly Endothelial: lymphatic endothelial cells.
 
 
 
