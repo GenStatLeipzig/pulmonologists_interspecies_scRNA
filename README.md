@@ -24,3 +24,10 @@ Dotplot of cross-species comparison of RNA marker genes. The point size indicate
 
 # Supplementary Informations on sample material
 
+Hamster: Dataset consists of lung cells isolated from lobus caudalis of two female and one male Syrian hamsters (Mesocricetus auratus; breed RjHan:AURA, Janvier Labs, France) at 10 to 12 weeks of age. All experiments involving animals were approved by institutional and governmental authorities (Freie Universität Berlin and LaGeSo Landesamt für Gesundheit und Soziales Berlin, Germany). For further Information see: https://doi.org/10.1038/s41467-021-25030-7
+
+Mouse: Dataset consists of pulmonary cells isolated from whole lung tissue. The single cell suspension of two 8 to 10 weeks old C57BL/6J mice was pooled prior performing single cell barcoding and library construction according to manufacturer’s instructions (10X Genomics). All experiments involving animals were approved by institutional and governmental authorities (Charité Universitätsmedizin Berlin and LaGeSo Landesamt für Gesundheit und Soziales Berlin, Germany).
+
+Human Charité: Dataset consists of lung cells isolated from fresh lung explants of four patients suffering from lung carcinoma who underwent lung resection. Only tumor-free peripheral lung tissue was used. The study was approved by the ethics committee at the Charité Universitätsmedizin Berlin. Written informed consent was obtained from all patients.
+
+Human Travaglini et al.: Sequenced lung cell data of patient 2 published at https://www.synapse.org by Travaglini et al. (https://doi.org/10.1038/s41586-020-2922-4) was used. According to the original publication the cells were isolated from freshly resected lung tissue of a 46-year-old male.
