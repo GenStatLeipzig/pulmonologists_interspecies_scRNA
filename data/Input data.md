@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 Input files
 
 -   s511_1\_diet_hamster.RDS
