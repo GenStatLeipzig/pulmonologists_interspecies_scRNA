@@ -160,11 +160,7 @@ for (i in 1:length(lung_list)) {
 }
 
 
-# # SAVE ----
-saveRDS(lung_list, here("results/s1_2_list_human_mouse_hamster_harmonized4integration.RDS"))
-
-
-# # STATS
+# # STATS----
 dim(human_travaglini )
 dim(human_charite)
 
@@ -178,8 +174,90 @@ dim(hamster3)
 dim(hamster)[1] - dim(hamster3)[1]
 dim(hamster3)[1]/dim(hamster)[1]
 
-# # FINALIZE----
 
+# # SCT TRANSFORM ----
+for (i in 1:length(lung_list)) {
+  message("SCT on ", i, " i.e. ", names(lung_list)[i], "\n-------------------------------------------------------")
+
+  lung_list[[i]] <- SCTransform(lung_list[[i]], verbose = T)
+}
+
+
+print(table(names(warnings() ))) # "iteration limit reached" see comment https://github.com/ChristophH/sctransform/issues/25 :"These warnings are showing that there are some genes for which it is hard to reliably estimate theta (presumably because of very few non-zero observations). Usually we don't worry about these warnings too much, since we regularize the parameters in a later step, thus averaging out uncertainty of individual gene  parameters."
+
+# # CREATE SINGLE scRNA-Seq OBJECT ----
+
+
+lunge_merged <- merge(lung_list[[1]],
+                      y = lung_list[2:length(lung_list)],
+                      project = "lung",
+                      merge.data = TRUE)
+
+if(DefaultAssay(lunge_merged) != "SCT") DefaultAssay(lunge_merged) = "SCT"
+
+
+# # PCA-DIMENSION REDUCTION----
+list.features <- SelectIntegrationFeatures(object.list = lung_list, nfeatures = 3000)
+VariableFeatures(lunge_merged) <- list.features
+
+lunge_merged <- RunPCA(object = lunge_merged, assay = "SCT", npcs = 50 ,features = list.features)
+
+
+# # BATCH REDUCTION via HARMONY-----
+
+lunge_merged <- RunHarmony(object = lunge_merged,
+                           assay.use = "SCT",
+                           reduction = "pca",
+                           dims.use = 1:50,
+                           group.by.vars = "run10x",
+                           plot_convergence = TRUE)
+
+# # UMAP AND CLUSTERING -----
+
+lunge_merged <- RunUMAP(object = lunge_merged, assay = "SCT", reduction = "harmony", dims = 1:50)
+
+
+lunge_merged <- FindNeighbors(object = lunge_merged, assay = "SCT", reduction = "harmony", dims = 1:50)
+#
+lunge_merged <- FindClusters(object = lunge_merged, resolution = 0.4)
+table(lunge_merged$SCT_snn_res.0.4)
+
+dput(unique(lunge_merged$species))
+
+
+lunge_merged$species = factor(lunge_merged$species, levels = c( "mouse", "hamster","human charite", "human travaglini"))
+
+lunge_merged$celltypeReported = lunge_merged$celltype
+
+relevantnames = c("orig.ident", "nCount_RNA", "nFeature_RNA", "nCount_SCT", "nFeature_SCT",
+                  "celltypeReported", "run10x", "species", "SCT_snn_res.0.4")
+
+lunge_merged@meta.data = lunge_merged@meta.data[,relevantnames]
+
+# # Rename Clusters----
+# using original assignments with some marker gene based corrections
+
+
+celltypeassignment = c("0" = "T Cells", '1' = "Endothelial", '2' = "Alveolar Macrophages", '3' = "NK Cells", '4' = "Macrophages/ Monocytes", '5' = "Endothelial", '6' = "Fibroblasts", '7' = "AT2", '8' = "Perivascular", '9' = "B Cells", '10' = "Macrophages/ Monocytes", '11' = "Mast Cells", '12' = "Macrophages/ Monocytes", '13' = "Endothelial", '14' = "AT1", '15' = "Alveolar Macrophages", '16' = "Ciliated Cells", '17' = "Endothelial", '18' = "Club Cells", "19" = "ly Endothelial", "20" = "Dendritic Cells", "21" = "Endothelial", "22" = "T Cells", "23" = "Proliferating NK/T", "24" = "Proliferating Alveolar Macrophages", "25" = "Endothelial", "26" = "T Cells", "27" = "B Cells")
+
+
+clusternames_new = data.table(old_id  = names(celltypeassignment),
+                              new_id = celltypeassignment)
+
+lunge_merged$cluster_seurat_v2 = clusternames_new[match_hk(lunge_merged$SCT_snn_res.0.4 %>% as.character, clusternames_new$old_id%>% as.character), new_id]
+
+
+clusterorder = c('Alveolar Macrophages', 'Proliferating Alveolar Macrophages', 'Macrophages/ Monocytes', 'Mast Cells', 'Dendritic Cells', 'T Cells', 'NK Cells', 'Proliferating NK/T', 'B Cells', 'AT1', 'AT2', 'Ciliated Cells', 'Club Cells', 'Endothelial', 'ly Endothelial', 'Fibroblasts', 'Perivascular' )
+
+lunge_merged$cluster_seurat_v2 = factor(lunge_merged$cluster_seurat_v2, levels = clusterorder)
+
+
+# # SAVING----
+saveRDS(lunge_merged, file = here("results/s1_3_lunge_merged.RDS"))
+
+
+
+# # FINALIZE SCRIPT----
 finalizeSkript()
 
 
