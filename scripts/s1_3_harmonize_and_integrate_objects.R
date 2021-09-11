@@ -11,11 +11,11 @@
 rm(list = ls())
 
 
-r_on_server = F
+r_on_server = T
 
 if(r_on_server) {
   rootpath = "/net/ifs1/san_projekte/projekte/"
-  .libPaths("/net/ifs1/san_projekte/projekte/genstat/07_programme/rpackages/forostar")
+  .libPaths("/net/ifs1/san_projekte/projekte/genstat/07_programme/rpackages/forostar3")
   toolboxH::initializeSkript(computer = "forostar" )
 } else {
   rootpath =  "R:"
