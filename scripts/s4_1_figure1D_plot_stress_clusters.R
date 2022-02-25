@@ -1,3 +1,8 @@
+# # LOAD DATA ----
+#
+Errint <- readRDS(".../Data/s603_2_seurat_lunge_merged_21-12-11.RDS") # processed integrated data, available at https://www.health-atlas.de/studies/54
+
+
 
 table(Errint$dataset)
 Errint = Errint[,Errint$dataset != 'humanSS2']
