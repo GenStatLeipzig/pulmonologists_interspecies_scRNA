@@ -7,19 +7,16 @@ All cross-species analysis code of this example including expression of canonica
 
 Input files as well as the processed, integrated result file are available as Seurat-R-object at the [Leipzig Health Atlas](https://www.health-atlas.de/studies/54). 
 
+![grafik](https://user-images.githubusercontent.com/73164857/157898202-fda5e47f-9f26-41f5-a6c3-8a59e3e44956.png)
 
+FIGURE 2
+Cross-species comparison of sequenced lung cells. A) Uniform manifold approximation and projection (UMAP) plot of identified cell populations across species with pie charts of lung cell frequencies in indicated species estimated from scRNA-Seq data. B) Dot plots indicating the stress response of lung cells across species based on the 8 stress related genes HSPA8, FOS, DUSP1, IER3, EGR1, FOSB, HSPB1 and ATF3. AM: alveolar macrophages, Prol. AM: proliferating alveolar macrophages, Mɸ: interstitial macrophages/monocytes, PMN: polymorphonuclear leukocytes, DC: dendritic cells, SMC: Smooth muscle cells, Mast: mast cells, NK: natural killer cells, Prol. NK/T: proliferating NK and T cells, AT1: alveolar epithelial cells type 1, AT2: alveolar epithelial cells type 2, Ciliated: ciliated cells, Club: club cells, EC: endothelial cells, ly EC: lymphatic endothelial cells, Fibro: fibroblasts, Perivasc: perivascular cells. Samples: Human Charité, cells from four fresh lung explants. Human Travaglini et al., data of patient 2 [34]. Mouse, cells of two whole lungs pooled prior analysis. Hamster, cells from lobus caudalis of three hamsters, data from 34381043. Monkey cells from two lungs, data from 33431511. Rat and Pig cells from two lungs each, data from 31840053. All experiments involving animals were approved by institutional and governmental authorities (Charité Universitätsmedizin Berlin or Freie Universität Berlin and LaGeSo Landesamt für Gesundheit und Soziales Berlin, Germany). Patient Material of Human Charité: The study was approved by the ethics committee at the Charité clinic (projects EA2/079/13), written informed consent was obtained from all patients. 
 
-![Figure Method 210830_v5 3](https://user-images.githubusercontent.com/73164857/132707879-fd342a69-1ba5-4e44-bc23-9d0d9f737a22.PNG)
-FIGURE 1: 
-Cross-species comparison of sequenced lung cells. A) Schematic single-cell ribonucleic acid sequencing workflow, created with Biorender.com. B) Pie charts of lung cell frequencies in indicated species estimated from scRNA-Seq data. C) Uniform manifold approximation and projection (UMAP) plot of identified cell populations across species. D) Feature plots indicating the stress response of single lung cells across species based on the 12 stress related genes _ATF3,  BTG2, DUSP1, EGR1, FOS, FOSB, HSPA8, HSPB1, IER3, JUN, JUNB,_ and _JUND_. Prolif.: proliferating, AT1: alveolar epithelial cells type 1, AT2: alveolar epithelial cells type 2, ly Endothelial: lymphatic endothelial cells. Samples: Mouse, 3205 cells of two whole lungs pooled prior analysis. Hamster, 10564 cells from lobus caudalis of three hamsters from [Nouailles-Kursar et al.]( https://doi.org/10.1038/s41467-021-25030-7). Human Charité, 18487 cells from four fresh lung explants. [Human Travaglini et al.](https://doi.org/10.1038/s41586-020-2922-4), 28793 cells of patient 2.
 
 # Supplementary Figures to the manuscript 
+![grafik](https://user-images.githubusercontent.com/73164857/157898462-06d44001-2409-4eee-8cec-c7ee1c51571a.png)
 
-![Dotplot_Marker_All in One](https://github.com/GenStatLeipzig/pulmonologists_interspecies_scRNA/blob/main/results/s5_1_canonical_markers.jpeg)
-
-
-FIGURE S1: 
-Dotplot of cross-species comparison of RNA marker genes. The point size indicates the percentage of cells in a certain population expressing the indicated marker gene. The colour indicates the dataset, and the transparancy indicates the expression level. Hamster: red, Mouse: blue, Human Charité: black, Human Travaglini et al.: green. Average expression is indicated by colour intensity. 
+Supplementary Figure 2. Overview of top gene markers used for cell identification and their expression strength between species. Dotplot of cross-species comparison for top RNA marker genes. The point size indicates the percentage of cells in a certain population expressing the indicated marker gene. Average expression is indicated by colour intensity while species is indicated by colouration. 
 
 # Supplementary Informations on sample material
 
