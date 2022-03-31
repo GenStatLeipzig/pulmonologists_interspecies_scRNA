@@ -543,21 +543,6 @@ correctAmbientRNA_noEmptyCells = function(seuratobject,  ribogenes=NULL, mitogen
     setnames(seuratobject_decontx_nobg@meta.data, "addedatrib", attribnames2)
   }
 
-  # ggplot(seuratobject_decontx_nobg@meta.data, aes(decontX_umap1, decontX_umap2, col = decontX_contamination)) + geom_point()
-  #
-  # ggplot(seuratobject_decontx_nobg@meta.data, aes(decontX_umap1, decontX_umap2, col = celltype)) + geom_point()
-
-  # if(is.null(mitogenes)==F){
-  #   message(Sys.time(), "...recalculating pct.mito") # todo only via orthologues
-  #
-  #   if(is.null(orthologue_genenames) ==T) seuratobject_decontx_nobg$pct.mito <- PercentageFeatureSet(seuratobject_decontx_nobg,features = mitogenes) else seuratobject_decontx_nobg$pct.mito <- PercentageFeatureSet(seuratobject_decontx_nobg[rownames(seuratobject_decontx_nobg) %in% orthologue_genenames,],features = mitogenes)
-  # }
-  #
-  # if(is.null(ribogenes)==F) {
-  #   message(Sys.time(), "...recalculating pct.ribo")
-  #
-  #   if(is.null(orthologue_genenames) ==T) seuratobject_decontx_nobg$pct.ribo =  PercentageFeatureSet(seuratobject_decontx_nobg, features = ribogenes) else seuratobject_decontx_nobg$pct.ribo =  PercentageFeatureSet(seuratobject_decontx_nobg[rownames(seuratobject_decontx_nobg) %in% orthologue_genenames,], features = ribogenes)
-  # }
 
 
   if(is.null(mitogenes)==F){
