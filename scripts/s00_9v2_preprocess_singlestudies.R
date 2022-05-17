@@ -279,7 +279,7 @@ doSCTransform = function(seuratobject, experimentIDcol = "run10x", variable.feat
 
   n_experiments = uniqueN(names(table(seuratobject[[experimentIDcol]])))
 
-  if(n_experiments ==1) seuratobject_list = list(seuratobject) else seuratobject_list <- SplitObject(object = seuratobject, split.by = "run10x")
+  if(n_experiments ==1) seuratobject_list = list(seuratobject) else seuratobject_list <- SplitObject(object = seuratobject, split.by = experimentIDcol)
   seuratobject_list
 
 
@@ -565,20 +565,10 @@ correctAmbientRNA_noEmptyCells = function(seuratobject,  ribogenes=NULL, mitogen
   seuratobject_decontx_nobg
 }
 
-# set true or false for the datset to preprocess ----
-do_mouse =T
-do_monkey =T
-do_pig =T
-do_rat =T
-do_humanTravaglini =T
-do_hamster = T
-do_humanCharite = T
-do_humanSS2 = T
+
 
 # # >>MOUSE----
 
-
-# if(do_mouse==T){
 mouse = readRDS(here("data/s511_1_diet_mouse.RDS"))
 mouse
 
@@ -695,11 +685,8 @@ mouse_filt_decontx3 <- subset(mouse_filt_decontx2, (pct.mito < param_QC_filter_m
 mouse_filt_decontx3
 
 saveRDS(mouse_filt_decontx2, file = here('results/s602_9v2_mouse_preprocessed_withDoubletts.RDS'))
-# }
 
 # >>MONKEY----
-
-# if(do_monkey) {
 
 monkey = readRDS(here("data/s101_2_greenmonkey_GSM4743527_16434_16436.RDS"))
 monkey
@@ -812,11 +799,7 @@ monkey_filt_decontx3
 
 saveRDS(monkey_filt_decontx2, file = here('results/s602_9v2_monkey_preprocessed_withDoubletts.RDS'))
 
-# }
-
 # # >>PIG----
-
-# if(do_pig==T) {
 pig = readRDS(here("data/s101_2_pig_DS026_DS027.RDS"))
 pig
 
@@ -928,7 +911,7 @@ pig_filt_decontx3
 
 
 saveRDS(pig_filt_decontx2, file = here('results/s602_9v2_pig_preprocessed_withDoubletts.RDS'))
-# }
+
 # >>RAT ----
 rat = readRDS(file = here("data/s101_2_rat_DS024_DS025.RDS"))
 rat
@@ -1187,7 +1170,7 @@ table(str_sub(hamster$orig.ident, start = str_length(hamster$orig.ident), end = 
 
 
 hamster = RenameCells(hamster,
-                      new.names = paste0(colnames(x = hamster[["RNA"]]),"-", str_sub(hamster$orig.ident, start = str_length(hamster$orig.ident), end = str_length(hamster$orig.ident) )))
+                      new.names = paste0(colnames(x = hamster[["RNA"]]),"-", str_sub(hamster$orig.ident, start = str_length(hamster$orig.ident), end = str_length(hamster$orig.ident) ))) # just to make sure unique cell names
 
 # ensuring basic QC ----
 qlist_hamster = venn3(rownames(hamster), orthologues$`Golden Hamster gene name`, orthologues$`Golden Hamster gene stable ID`)
@@ -1334,8 +1317,6 @@ humanCharite = DietSeurat(humanCharite_loaded)
 table(str_sub(humanCharite$orig.ident, start = str_length(humanCharite$orig.ident), end = str_length(humanCharite$orig.ident)))
 #
 #
-# humanCharite = RenameCells(humanCharite,
-#                       new.names = paste0(colnames(x = humanCharite[["RNA"]]),"-", str_sub(humanCharite$orig.ident, start = str_length(humanCharite$orig.ident), end = str_length(humanCharite$orig.ident) )))
 
 # ensuring basic QC ----
 qlist_humanCharite = venn3(rownames(humanCharite), orthologues$`Human gene name`, orthologues$`Human gene stable ID`)
