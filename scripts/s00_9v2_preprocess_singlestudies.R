@@ -327,7 +327,7 @@ calcDoubletts <- function(seuratobject,
                           experimental_batchID = "run10x"
 ) {
   # require(jtools)
-  seuratobject_name = deparse(substitute(seuratobject_name))
+  seuratobject_name = deparse(substitute(seuratobject))
   library(DoubletFinder) # remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
 
   # seuratobject = monkey_filt_decontx
