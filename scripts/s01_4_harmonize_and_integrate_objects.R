@@ -128,7 +128,7 @@ require(Seurat.utils) #  # from https://github.com/vertesy/Seurat.utils/
 renameSeuratOrthologues = function(seuratobject, speciesname, orthotable,speciescolumn, confidencecolumn , all_genes_uppercase =F) {
   # seuratobject = hamster; speciesname = "hamster"; orthotable = copy(orthologues); confidencecolumn = "Golden Hamster orthology confidence [0 low, 1 high]"; speciescolumn = "name_hamster"
   #
-  orthologues_species= unique(orthologues[is.na(get(speciescolumn))==F, .(name_human, name_species = get(speciescolumn), max_in_any_mensch,confidence=get(confidencecolumn))])[order(name_species, -max_in_any_mensch, na.last = T)]
+  orthologues_species= unique(orthotable[is.na(get(speciescolumn))==F, .(name_human, name_species = get(speciescolumn), max_in_any_mensch,confidence=get(confidencecolumn))])[order(name_species, -max_in_any_mensch, na.last = T)]
   orthologues_species[allDuplicatedEntries(name_species)]
   orthologues_species= orthologues_species[duplicated(name_species)==F]
   orthologues_species
