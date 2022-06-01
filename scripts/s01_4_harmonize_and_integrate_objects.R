@@ -249,17 +249,17 @@ input1 = makeInputUpset(list(hamster = hamster_renamelist$renamingtable$gene_use
                              rat = rat_renamelist$renamingtable$gene_used_in_consensus))
 
 
-upset(input1,nsets = ncol(input1)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes", nintersects = 8)
+upset(input1,nsets = ncol(input1)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes", nintersects = ncol(input1))
 
 jpeg(here("results/s603_2_overlap_genes_all_datasets.jpeg"), width = 6.5, height = 4.5, units = "in", res = 150, quality = 100)
 
-upset(input1,nsets = ncol(input1)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes", nintersects = 8)
+upset(input1,nsets = ncol(input1)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes", nintersects = ncol(input1))
 
 dev.off()
 
 pdf(here("results/s603_2_overlap_genes_all_datasets.pdf"), width = 6.5, height = 4.5)
 
-upset(input1,nsets = ncol(input1)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes", nintersects = 8)
+upset(input1,nsets = ncol(input1)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes", nintersects = ncol(input1))
 
 dev.off()
 
@@ -274,7 +274,7 @@ input3 = makeInputUpset(list(hamster = hamster_renamelist$renamingtable[confiden
                              rat = rat_renamelist$renamingtable[confidence ==1, gene_used_in_consensus]))
 
 
-upset(input3,nsets = ncol(input3)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes\n(high orthologue confidence)", nintersects = 8)
+upset(input3,nsets = ncol(input3)-1,order.by =c("freq" ,"degree"), decreasing = c(TRUE, TRUE), set_size.scale_max =60000, text.scale = 1.3, set_size.show = TRUE,mainbar.y.label = "Overlap Genes\n(high orthologue confidence)", nintersects = ncol(input3))
 
 renamelist_all = rbind(hamster_renamelist$renamingtable,
                        mouse_renamelist$renamingtable,

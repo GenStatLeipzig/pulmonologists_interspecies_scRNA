@@ -1,0 +1,18 @@
+source	category	genename_original	genename_harmonized
+Denisenko et al.	Stress related genes	Fosb	Fosb
+Denisenko et al.	Stress related genes	Fos	Fos
+Denisenko et al.	Stress related genes	Jun	Jun
+Denisenko et al.	Stress related genes	Junb	Junb
+Denisenko et al.	Stress related genes	Jund	Jund
+Denisenko et al.	Stress related genes	Atf3	Atf3
+Denisenko et al.	Stress related genes	Egr1	Egr1
+Denisenko et al.	Stress related genes	Hspa1a	Hspa1a
+Denisenko et al.	Stress related genes	Hspa1b	Hspa1b
+Denisenko et al.	Stress related genes	Hsp90ab1	Hsp90ab1
+Denisenko et al.	Stress related genes	Hspa8	Hspa8
+Denisenko et al.	Stress related genes	Hspb1	Hspb1
+Denisenko et al.	Stress related genes	Ier3	Ier3
+Denisenko et al.	Stress related genes	Ier2	Ier2
+Denisenko et al.	Stress related genes	Btg1	Btg1
+Denisenko et al.	Stress related genes	Btg2	Btg2
+Denisenko et al.	Stress related genes	Dusp1	Dusp1
