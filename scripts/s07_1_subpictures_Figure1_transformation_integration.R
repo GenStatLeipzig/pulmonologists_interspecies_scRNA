@@ -16,7 +16,7 @@ jpeg2 = function(..., res = 150) jpeg(..., units = "in", quality = 100, res = re
 # # LOADING----
 lunge_merged_processed = readRDS( here("results/s603_2_seurat_lunge_merged_21-12-11.RDS"))
 
-p0 <- DimPlot(lunge_merged_processed, reduction = "umap", group.by = "species", label = T) + NoLegend() + ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2") 
+p0 <- DimPlot(lunge_merged_processed, reduction = "umap", group.by = "species", label = T) + NoLegend() + ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2")
 p0
 p0data = p0$data %>% data.table(., keep.rownames=T)
 p0data
@@ -27,7 +27,7 @@ labeltext = p0data[, .(UMAP_1 = -10,
                    ]
 labeltext
 require(cowplot)
-p0v2 = ggplot(p0data, aes(UMAP_1, UMAP_2, col = species, label = species)) + geom_point(size = 0.3, alpha = 0.2) + geom_text(data = labeltext,fontface = "bold", alpha = 0.8 ) + theme_cowplot() + guides(col = "none", label = "none")+ ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2") 
+p0v2 = ggplot(p0data, aes(UMAP_1, UMAP_2, col = species, label = species)) + geom_point(size = 0.3, alpha = 0.2) + geom_text(data = labeltext,fontface = "bold", alpha = 0.8 ) + theme_cowplot() + guides(col = "none", label = "none")+ ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2")
 p0v2
 
 pdf(here("results/s607_3_umap_with_integration.pdf"), 3.5,3.5)
@@ -56,11 +56,11 @@ lunge_merged2 <- lunge_merged %>%
   # CellCycleScoring(s.features = s.genes, g2m.features = g2m.genes) %>%
   RunPCA(features=VariableFeatures(.),verbose=TRUE) %>%
   FindNeighbors(dims=1:50,verbose=TRUE) %>%
-  FindClusters(resolution = 0.3) %>% 
-  FindClusters(resolution = 0.4) %>% 
+  FindClusters(resolution = 0.3) %>%
+  FindClusters(resolution = 0.4) %>%
   RunUMAP(dims=1:50,verbose=TRUE)
 
-p1 <- DimPlot(lunge_merged2, reduction = "umap", group.by = "species", label = T) + NoLegend() + ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2") 
+p1 <- DimPlot(lunge_merged2, reduction = "umap", group.by = "species", label = T) + NoLegend() + ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2")
 p1
 p1data = p1$data %>% data.table(., keep.rownames=T)
 p1data
@@ -71,7 +71,7 @@ labeltext = p1data[, .(UMAP_1 = -12.5,
 ]
 labeltext
 require(cowplot)
-p1v2 = ggplot(p1data, aes(UMAP_1, UMAP_2, col = species, label = species)) + geom_point(size = 0.3, alpha = 0.2) + geom_text(data = labeltext,fontface = "bold" , alpha = 0.8) + theme_cowplot() + guides(col = "none", label = "none")+ ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2") 
+p1v2 = ggplot(p1data, aes(UMAP_1, UMAP_2, col = species, label = species)) + geom_point(size = 0.3, alpha = 0.2) + geom_text(data = labeltext,fontface = "bold" , alpha = 0.8) + theme_cowplot() + guides(col = "none", label = "none")+ ggtitle("") + xlab("UMAP 1")  + ylab("UMAP 2")
 p1v2
 
 pdf(here("results/s607_3_umap_NO_integration.pdf"), 3.5,3.5)
@@ -84,100 +84,47 @@ dev.off()
 
 
 ## variance stabilistation ----
-set.seed(2712)
-randomgenes1k = sample(rownames(lunge_merged_processed), 500)
+
+set.seed(1802)
+randomgenes1k = sample(rownames(lunge_merged_processed), 20)
 str(randomgenes1k)
+
 matrix_RNA = lunge_merged_processed@assays$RNA[randomgenes1k,]
-matrix_RNAnum_pre = as.numeric(matrix_RNA)
-matrix_RNAnum = matrix_RNAnum_pre[matrix_RNAnum_pre>0]
+dim(matrix_RNA)
+matrix_RNAnum_pre = as.data.table(matrix_RNA %>% as.matrix %>% t)
+matrix_RNAnum = melt(matrix_RNAnum_pre)
+ngen=10
+p1v3 = ggplot(matrix_RNAnum[variable %in% unique(variable)[1:ngen]&value>0], aes(variable, value, fill = variable)) + geom_boxplot(fill='red', col ="red") + xlab(paste0(ngen, "randomly\nchosen genes"))+ylab("Raw\nCounts per cell")+
+  theme_minimal_grid()+scale_y_continuous(label=label_comma())+
+  theme(
+    # axis.text.x = element_text(angle = 90, hjust = 1, vjust =0.4)+
+    axis.text.x = element_blank()
+  )
 
-hist(matrix_RNAnum, breaks = 200)
-hist(matrix_RNAnum, breaks = 200, ylim = c(0, 100000))
-hist(matrix_RNAnum[ matrix_RNAnum<max(matrix_RNAnum)/5 ], breaks = 200)
 
+p1v3
 
 matrix_SCT = lunge_merged_processed@assays$SCT[randomgenes1k,]
-matrix_SCTnum_pre = as.numeric(matrix_SCT)
-matrix_SCTnum = matrix_SCTnum_pre[matrix_SCTnum_pre>0]
-hist(matrix_SCTnum, breaks = 200)
-hist(matrix_SCTnum[ matrix_SCTnum<max(matrix_SCTnum)/5 ], breaks = 200)
+dim(matrix_SCT)
+matrix_SCTnum_pre = as.data.table(matrix_SCT %>% as.matrix %>% t)
+matrix_SCTnum = melt(matrix_SCTnum_pre)
+matrix_SCTnum = matrix_SCTnum[ value>0]
+matrix_SCTnum[, value:= scale(value ), variable]
+p0v3 = ggplot(matrix_SCTnum[variable %in% unique(variable)[1:ngen]], aes(variable, value, fill = variable)) + geom_boxplot(fill='red', col ="red") + xlab(paste0(ngen, " randomly\nchosen genes"))+ylab("SCT-transformed\nscaled Counts per cell")+
+  theme_minimal_grid()+scale_y_continuous(label=label_comma())+
+  theme(
+    # axis.text.x = element_text(angle = 90, hjust = 1, vjust =0.4)+
+    axis.text.x = element_blank()
+  )
+p0v3
 
-require("ggforce")
-
-ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
-  geom_point() +
-  facet_zoom(xlim = c(2, 4))
-
-require(scales)
-scientific_10 <- function(x) {
-  parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
-}
-library(scales)
+p1v3 + p0v3
 
 
-
-matrix_RNAnum_dt = data.table(matrix_RNAnum)
-p1 = ggplot(matrix_RNAnum_dt, aes(matrix_RNAnum)) + geom_histogram(bins = 400) + xlab("RNA counts")+ylab("Observations\n(500 random genes)")+
-  facet_zoom(xlim = c(1, 100), horizontal = F)+ theme_solarized()+scale_y_continuous(label=label_comma())
-
-p1
-
-matrix_SCTnum_dt = data.table(matrix_SCTnum)
-p0 = ggplot(matrix_SCTnum_dt, aes(matrix_SCTnum)) + geom_histogram(bins = 200) + xlab("normalized and\n transformed counts")+
-  facet_zoom(xlim = c(0.5, 1.5), horizontal = F) + theme_solarized()+scale_y_continuous(label=label_comma()) +ylab("Observations\n(500 random genes)")
-  
-p0
-
-
-
-jpeg2(here("results/s607_3_no_transform.jpeg"), 3,3)
-p1
+jpeg2(here("results/s607_3v3_no_transform.jpeg"), 3.3,3)
+p1v3
 dev.off()
 
-jpeg2(here("results/s607_3_SCT_transformed.jpeg"), 3,3)
-p0
-dev.off()
-
-# nochmal
-
-set.seed(2712)
-randomgenes1k = sample(rownames(lunge_merged_processed), 100)
-str(randomgenes1k)
-matrix_RNA = lunge_merged_processed@assays$RNA[randomgenes1k,]
-matrix_RNAnum_pre = as.numeric(matrix_RNA)
-matrix_RNAnum = matrix_RNAnum_pre[matrix_RNAnum_pre>0]
-
-hist(matrix_RNAnum, breaks = 200)
-hist(matrix_RNAnum, breaks = 200, ylim = c(0, 100000))
-hist(matrix_RNAnum[ matrix_RNAnum<max(matrix_RNAnum)/5 ], breaks = 200)
-
-
-matrix_SCT = lunge_merged_processed@assays$SCT[randomgenes1k,]
-matrix_SCTnum_pre = as.numeric(matrix_SCT)
-matrix_SCTnum = matrix_SCTnum_pre[matrix_SCTnum_pre>0]
-hist(matrix_SCTnum, breaks = 200)
-hist(matrix_SCTnum[ matrix_SCTnum<max(matrix_SCTnum)/5 ], breaks = 200)
-
-library(scales)
-
-matrix_RNAnum_dt = data.table(matrix_RNAnum)
-p1v2 = ggplot(matrix_RNAnum_dt, aes(matrix_RNAnum)) + geom_histogram( binwidth=1) + xlab("RNA counts")+ylab("Observations\n(100 random genes)")+
-theme_minimal_grid()+scale_y_continuous(label=label_comma())
-
-p1v2
-
-matrix_SCTnum_dt = data.table(matrix_SCTnum)
-p0v2 = ggplot(matrix_SCTnum_dt, aes(matrix_SCTnum)) + geom_histogram( binwidth = 0.5) + xlab("normalized and\n transformed counts")+
-  theme_minimal_grid()+scale_y_continuous(label=label_comma()) +ylab("Observations\n(100 random genes)") + xlim(c(0, 5))
-
-p0v2
-
-
-
-jpeg2(here("results/s607_3_no_transform.jpeg"), 3,3)
-p1v2
-dev.off()
-
-jpeg2(here("results/s607_3_SCT_transformed.jpeg"), 3,3)
-p0v2
+jpeg2(here("results/s607_3v3_SCT_transformed.jpeg"), 3.3,3)
+p0v3
 dev.off()
