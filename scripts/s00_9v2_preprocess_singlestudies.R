@@ -1307,7 +1307,7 @@ saveRDS(hamster_filt_decontx2, file = here('results/s602_9v2_hamster_preprocesse
 humanCharite_loaded = readRDS(here("data/s511_1_diet_human_charite.RDS"))
 humanCharite_loaded
 
-humanCharite_loaded@meta.data$run10x = paste0("",humanCharite@meta.data$orig.ident) # species is as ma present in prefix
+humanCharite_loaded@meta.data$run10x = paste0("",humanCharite_loaded@meta.data$orig.ident) # species is as ma present in prefix
 table(humanCharite_loaded@meta.data$run10x)
 humanCharite_loaded@meta.data$species = "humanCharite"
 
